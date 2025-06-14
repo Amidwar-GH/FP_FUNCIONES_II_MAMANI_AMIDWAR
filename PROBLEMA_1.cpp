@@ -10,7 +10,7 @@ resultado final indicando el ganador del juego. */
 using namespace std;
 
 int main(){
-	int JUGADA,CPU, VIDAS_DEL_USUARIO = 3;
+	int JUGADA,CPU, VICTORIAS_DEL_USUARIO = 0, VICTORIAS_DEL_CPU = 0;
 	srand(time(0)); // inicializamos el generador de numeros aleatorios
 	do{
 		cout<<"Digite el numero de su jugada."<<endl;
@@ -19,54 +19,65 @@ int main(){
 		cout<<"3. TIJERA."<<endl;
 		cin>>JUGADA;
 		
+		while(JUGADA<1 || JUGADA >3){
+			cout<<"JUGADA INVALIDA, DIGITE DENUEVO UNA JUGADA: "; cin>>JUGADA;
+		}
 		
 		CPU = rand() % 3 + 1;
+		
+		cout<<"Elegiste: ";
+		if(JUGADA == 1){
+			cout<<"PIEDRA";
+		}else if(JUGADA == 2 ){
+			cout<<"PAPEL";
+		}else if(JUGADA == 3){
+			cout<<"TIJERA";
+		}
+		cout<<endl;
+			
+		cout<<"CPU eligio: ";
+		if(CPU == 1){
+			cout<<"PIEDRA";
+		}else if(CPU == 2 ){
+			cout<<"PAPEL";
+		}else if(CPU == 3){
+			cout<<"TIJERA";
+		}
+		cout<<endl;
+		
 		if(JUGADA == CPU){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
 			cout<<"EMPATE"<<endl;
-		}
-		
-		if(JUGADA == 1 && CPU == 3){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
+		}else if(JUGADA == 1 && CPU == 3){
 			cout<<"FELICIDADES, GANASTE ESTA RONDA."<<endl;
-		}
-		
-		if(JUGADA == 1 && CPU == 2){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
-			cout<<"PERDISTE ESTA RONDA."<<endl;
-			VIDAS_DEL_USUARIO -= 1;
-		}
-		
-		if(JUGADA == 3 && CPU == 2){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
+			VICTORIAS_DEL_USUARIO += 1;
+		}else if(JUGADA == 2 && CPU == 1){
 			cout<<"FELICIDADES, GANASTE ESTA RONDA."<<endl;
-		}
-		if(JUGADA == 3 && CPU == 1){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
-			cout<<"PERDISTE ESTA RONDA."<<endl;
-			VIDAS_DEL_USUARIO -= 1;
-		}
-		if(JUGADA == 2 && CPU == 1){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
+			VICTORIAS_DEL_USUARIO += 1;
+		}else if(JUGADA == 3 && CPU == 2){
 			cout<<"FELICIDADES, GANASTE ESTA RONDA."<<endl;
-		}
-		if(JUGADA == 2 && CPU == 3){
-			cout<<"EL CPU ELIGIO "<<CPU<<" TU ELEGISTE "<<JUGADA<<endl;
+			VICTORIAS_DEL_USUARIO += 1;
+		}else{
 			cout<<"PERDISTE ESTA RONDA."<<endl;
-			VIDAS_DEL_USUARIO -= 1;
+			VICTORIAS_DEL_CPU +=1;
 		}
 		
+		cout<<"Tu puntaje es "<<VICTORIAS_DEL_USUARIO<<endl;
+		cout<<"El puntaje del CPU es "<<VICTORIAS_DEL_CPU<<endl;
+		cout<<endl;
 		
-	}while(VIDAS_DEL_USUARIO != 0);
+	}while(VICTORIAS_DEL_USUARIO<3 && VICTORIAS_DEL_CPU<3);
 	
+	
+	
+	
+	if(VICTORIAS_DEL_USUARIO == 3 ){
+		cout<<"FELICIDADES, GANASTE EL JUEGO."<<endl;
+	}else{
+		cout<<"SUERTE PARA LA PROXIMA. ";
+	}
 	
 	
 	return 0;
 } 
-	
-	
-	
-	
-	
 
 
